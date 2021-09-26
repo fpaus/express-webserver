@@ -1,6 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const ParamsRoute = require("../routes/params");
+const express = require('express');
+const cors = require('cors');
+const ParamsRoute = require('../routes/params');
 
 class Server {
   app;
@@ -22,11 +22,11 @@ class Server {
     this.app.use(express.json());
 
     //Directorio Publico
-    this.app.use(express.static("src/public"));
+    this.app.use(express.static('src/public'));
   }
 
   routes() {
-    this.app.use("/api/params", ParamsRoute);
+    this.app.use('/api/params', ParamsRoute);
   }
 
   listen() {

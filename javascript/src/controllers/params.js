@@ -1,54 +1,47 @@
-const { StatusCodes } = require("http-status-codes");
+const { StatusCodes } = require('http-status-codes');
+
+const service = require('../services/ParamService');
 
 const getAll = (req, res) => {
   const query = req.query;
 
-  res
-    .json({
-      msj: "Get",
-      ...query,
-    })
-    .status(StatusCodes.OK);
+  service.findAll().then((params) => {
+    res.json(params).status(StatusCodes.OK);
+  });
 };
 
 const getOne = (req, res) => {
-  const { id } = req.params;
+  const { codigo } = req.params;
 
-  res
-    .json({
-      msj: "Get",
-      id,
-    })
-    .status(StatusCodes.OK);
+  service.findOne(codigo).then((param) => {
+    res.json(param).status(StatusCodes.OK);
+  });
 };
 
 const create = (req, res) => {
   const body = req.body;
 
-  res
-    .json({
-      msj: "Post",
-      body: body,
-    })
-    .status(StatusCodes.CREATED);
+  service.create(body).then((param) => {
+    res.json(param).status(StatusCodes.CREATED);
+  });
 };
 
 const update = (req, res) => {
-  const { id } = req.params;
+  const { codigo } = req.params;
   const body = req.body;
 
   res
     .json({
-      msj: "Put",
-      id,
+      msj: 'Put',
+      codigo,
       ...body,
     })
     .status(StatusCodes.OK);
 };
 
 const remove = (req, res) => {
-  const { id } = req.params;
-  res.json({ id }).status(StatusCodes.OK);
+  const { codigo } = req.params;
+  res.json({ codigo }).status(StatusCodes.OK);
 };
 
-module.exports = {getAll, getOne, create, update, remove}
+module.exports = { getAll, getOne, create, update, remove };
